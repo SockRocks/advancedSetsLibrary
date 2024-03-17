@@ -53,27 +53,21 @@ class Set:
         :return: A list of the elements the set
         '''
 
-        return_list = []
-        for i in range(len(self.elements)):
-            return_list.append(0)
+        return_list = [0 for i in range(len(self.elements))]
         
         for i in range(len(self.elements)):
-            mutable = False
-
-            # Checks if the current element is mutable
-            try:
-                test_dict = dict()
-                test_dict[self.elements[i]] = 1
-            except TypeError:
-                mutable = True
-            if isinstance(self.elements[i], Set):
-                mutable = True
+            # Checks if the current element is iterable
+            isIter = Set.isIterable(self.elements[i])
             
-            if mutable:
+            if isIter and type(self.elements[i]) != tuple and not isinstance(self.elements[i], Set):
                 # If the current element is mutable, then it's converted to a list
                 # notice that even set objects will call the current method to convert to a list until the primitive
                 # types are reached
+                #print(self.elements[i].elements)
                 return_list[i] = list(self.elements[i])
+                #return_list[i] = list(self.elements[i])
+            elif isIter:
+                return_list[i] = self.elements[i].__list__()
             else:
                 # If an element is not mutable than it can be added to the return list as is
                 return_list[i] = self.elements[i]
@@ -124,6 +118,15 @@ class Set:
     def complement(self):
         return self.setMinus(self.universe)
 
+
+    @staticmethod
+    def isIterable(obj):
+        try:
+            getattr(obj, '__iter__')
+        except AttributeError:
+            return False
+        return True
+
     def intersection(self, setb):
         result = []
 
@@ -141,27 +144,14 @@ class Set:
         :return: A list of elements where all mutable elements have been converted to set objects
         '''
 
-        return_list = []
-
-        # Extends the return list to be the length of the number of elements submitted
-        for i in range(len(elements)):
-            return_list.append(0)
+        return_list = [0 for i in range(len(elements))]
 
         for i in range(len(elements)):
-            mutable = False
 
             # Checks to see if the current element is mutable
-            try:
-                testDict = dict()
-                testDict[elements[i]] = 1
-            except TypeError:
-                mutable = True
-
-            # The set class is not considered mutable
-            if isinstance(elements[i], Set):
-                mutable = False
+            isIter = Set.isIterable(elements[i])
             
-            if mutable:
+            if isIter and type(elements[i]) != tuple and not isinstance(elements[i], Set):
                 # Converts the current element to a set object
                 return_list[i] = Set(elements[i], universe=self.universe)
             else:
@@ -180,6 +170,13 @@ class Set:
                 clean.append(element)
         return clean
 
+    @staticmethod
+    def inCheck(element, set):
+        for x in set:
+            if x == element:
+                return True
+        return False
+
     def powerSet(self):
         '''
         Calculates the power set of a set
@@ -190,15 +187,13 @@ class Set:
         powerSet = calcPSetOf(_self)
         return Set(powerSet)
 
-
     def subsetof(self, setb):
         '''
         Checks if the current set is a subset of the input set
         :param setb: comparison set
         :return: Is this set is a subset of setb
         '''
-
-        for y in self:
+        for y in self.elements:
             if y not in setb:
                 return False
         return True
@@ -209,11 +204,11 @@ class Set:
         :param setb:
         :return:
         '''
+        if isinstance(setb, Set):
 
-        if self.subsetof(setb) and setb.subsetof(self):
-            return True
-        else:
-            return False
+            if self.subsetof(setb) and setb.subsetof(self):
+                return True
+        return False
 
     def setDisplayMode(self):
         '''
