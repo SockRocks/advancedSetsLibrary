@@ -10,6 +10,7 @@
 + The intersection of A and B is `A & B`
 + `A.powerSet()` calculates the powerset of A
 + `A - B` outputs the set difference
++ `A*B` calculates the cartesian product of the two sets (to calculate tripple products and higher use `A.cartesianProduct(*sets*)`
 + `A.complement()` returns the complement of A with the input universe
 + `A.setDisplayMode()` displays each element of A one by one by hitting enter
 + Lists and sets can be freely converted between eachother by calling `A.__list__()` to convert A to a list or calling Set(*list*) to convert the list to a set object
