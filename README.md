@@ -14,3 +14,6 @@
 + `A.complement()` returns the complement of A with the input universe
 + `A.setDisplayMode()` displays each element of A one by one by hitting enter
 + Lists and sets can be freely converted between eachother by calling `A.__list__()` to convert A to a list or calling Set(*list*) to convert the list to a set object
+
+___Warning____
+As of current, do not create sets of sets by passing in another Set object, instead just pass a list of the elements. This will be fixed soon.
