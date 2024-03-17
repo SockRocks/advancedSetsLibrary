@@ -247,10 +247,3 @@ class Set:
                     _y.insert(0, self[i])
                     result.append(tuple(_y))
         return result
-
-
-
-
-
-A = Set(1,[[2,3]])
-print(list(A))
