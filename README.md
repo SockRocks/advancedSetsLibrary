@@ -1,19 +1,23 @@
+This package is intended to operate as a simple intuitive interface for handling laborious elementary set theory calculations.
+The goal is to make all operations on sets feel intuitive and number like (similar to MATLAB's handling of matrices)!
+
 *********************Installation*********************
-- Download the zipfiile
-- copy all files into your current project directory
-- invoke `from newsets import Set`
-- Done!
-
+Ensure that Python is installed on your machine then run `pip install SetCalcPy`
+Invoke `import SetCalcPy` in your file or console!
+Enjoy!
 *********************Simple Operations*********************
-+ Declare a set `A = Set(1,2,3..., universe=[universal set])`
-+ If B is another set to find the union just do `A + B`
-+ The intersection of A and B is `A & B`
-+ `A.powerSet()` calculates the powerset of A
-+ `A - B` outputs the set difference
-+ `A*B` calculates the cartesian product of the two sets (to calculate tripple products and higher use `A.cartesianProduct(*sets*)`
-+ `A.complement()` returns the complement of A with the input universe
-+ `A.setDisplayMode()` displays each element of A one by one by hitting enter
-+ Lists and sets can be freely converted between eachother by calling `A.__list__()` to convert A to a list or calling Set(*list*) to convert the list to a set object
++ Declare sets like so `A = Set(1,2,3)` and `B = Set(1,2,Set(3,4))
++ Take the union of two sets (find all elements in `A` or `B`): `A + B`
++ Take the intersection of two sets (find all elements in `A` and `B`): `A & B`
++ Take the disjoint of two sets (find all elements in `A` but not `B`): `A - B`
++ Find the powerset of a set (all subsets of `A`): `A.powerSet()`
++ Calculate the cartesian product of two or more sets: `A * B` or `A.cartesianProduct(*sets to multiply by*)`
++ Find the complement of a set (all elements in the universe specified but not in `A`): `A.complement()`
 
-___Warning___
-As of current, do not create sets of sets by passing in another Set object, instead just pass a list of the elements. This will be fixed soon.
+*********************Other Features*********************
+- Iterate through sets just like lists
+- Access elements just like lists (the first element of `A` is `A[0]`)
+- Test set equality: `A == B`
+- Convert to a list: `A.__list__()`
+- Check for membership: `1 in A` evaluates to True because 1 is an element of `A`
+- Check length: `len(A)`
