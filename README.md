@@ -3,8 +3,11 @@ The goal is to make all operations on sets feel intuitive and number like (simil
 
 *********************Installation*********************
 Ensure that Python is installed on your machine then run `pip install SetCalcPy`
-Invoke `import SetCalcPy` in your file or console!
+Invoke `from SetCalcPy import Set` in your file or python console!
 Enjoy!
+
+Alternatively you can install the wheel file provided in this repository and run `pip install SetCalcPy-1.2.2-py3-none-any.whl` in command prompt 
+(or the equivalent on your OS) from the directory you installed this in.
 
 *********************Simple Operations*********************
 + Declare sets like so `A = Set(1,2,3)` and `B = Set(1,2,Set(3,4))
