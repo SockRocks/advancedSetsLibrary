@@ -1,6 +1,5 @@
 from .powerSet.powerSetCalc import calcPSetOf
 
-
 class Set:
     def __init__(self, *elements, universe=[]):
         """
@@ -13,7 +12,7 @@ class Set:
 
         # If the user mistakenly enters a single list to contain all elements then that list is converted into an
         # elements list
-        if len(elements) == 1 and (type(elements[0]) == list or type(elements[0]) == tuple):
+        if len(elements) == 1 and type(elements[0]) == list:
             elements = elements[0]
 
         if type(universe) != list and not isinstance(universe, Set):
@@ -73,6 +72,8 @@ class Set:
             elif isIter and type(self.elements[i]) != tuple:
                 # Converts set objects to lists
                 return_list[i] = self.elements[i].__list__()
+            elif type(self.elements[i]) == tuple:
+                return_list[i] = Set.SetTupleToTupleSet(self.elements[i])
             else:
                 # If an element is not mutable than it can be added to the return list as is
                 return_list[i] = self.elements[i]
@@ -98,6 +99,21 @@ class Set:
 
     def __mul__(self, other):
         return self.cartesianProduct(other)
+
+    @staticmethod
+    def SetTupleToTupleSet(tup):
+        result = [0 for i in range(len(tup))]
+        for j in range(len(tup)):
+            currentEl = tup[j]
+            if isinstance(currentEl, Set):
+                result[j] = currentEl.__list__()
+            elif type(currentEl) == tuple:
+                result[j] = Set.SetTupleToTupleSet(currentEl)
+            else:
+                result[j] = currentEl
+
+        return tuple(result)
+
 
     @staticmethod
     def tryConvert(obj):
@@ -163,9 +179,12 @@ class Set:
         :param obj: Any object
         :return: True if the object is iterable and false if not
         """
-        try:
-            getattr(obj, '__iter__')
-        except AttributeError:
+        if type(obj) != str:
+            try:
+                getattr(obj, '__iter__')
+            except AttributeError:
+                return False
+        else:
             return False
         return True
 
@@ -193,7 +212,6 @@ class Set:
         '''
 
         return_list = [0 for i in range(len(elements))]
-
         for i in range(len(elements)):
 
             # Checks to see if the current element is iterable
@@ -303,15 +321,16 @@ class Set:
         """
 
         result = []
+        _setb = setb
         if type(setb[0]) == list or type(setb[0]) == tuple and len(setb) == 1:
-            setb = setb[0]
+            _setb = setb[0]
 
-        if len(setb) == 1:
+        if len(_setb) == 1:
             for x in self:
-                for y in setb[0]:
+                for y in _setb[0]:
                     result.append((x,y))
         else:
-            otherComb = setb[0].cartesianProduct(setb[1:])
+            otherComb = _setb[0].cartesianProduct(_setb[1:][0])
             for i in range(len(self)):
                 for y in otherComb:
                     _y = list(y)

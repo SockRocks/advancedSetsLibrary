@@ -1,15 +1,14 @@
-from setuptools import find_packages, setup, Extension
+from setuptools import find_packages, setup
 
 with open('README.md', 'r')as f:
     long_desc = f.read()
 
 setup(
     name='SetCalcPy',
-    ext_modules=[Extension(name='powerSetCalc', sources=['SetCalcPy/powerSet/powerSetCalc.c'])],
-    version='1.1.2',
+    version='1.2.5',
     description='A library for performing basic set theory operations.',
-    package_dir = {"Set":"SetCalcPy"},
-    packages = ['SetCalcPy'],
+    package_dir = {"SetCalcPy":"src/SetCalcPy", 'powerSet':'src/SetCalcPy/powerSet'},
+    packages = find_packages(where='src'),
     keywords=['calculator', 'homework-help', 'set-theory'],
     long_description = long_desc,
     long_description_content_type = 'text/markdown',
