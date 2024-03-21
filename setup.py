@@ -5,7 +5,7 @@ with open('README.md', 'r')as f:
 
 setup(
     name='SetCalcPy',
-    version='1.2.5',
+    version='1.2.6',
     description='A library for performing basic set theory operations.',
     package_dir = {"SetCalcPy":"src/SetCalcPy", 'powerSet':'src/SetCalcPy/powerSet'},
     packages = find_packages(where='src'),

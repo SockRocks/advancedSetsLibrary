@@ -35,7 +35,7 @@ class Set:
 
     def __iter__(self):
         # This is strictly used for the beginning of iteration
-        return self
+        return self.copy()
 
     def __getitem__(self, index):
         # Used for brackets element accessing
@@ -113,6 +113,9 @@ class Set:
                 result[j] = currentEl
 
         return tuple(result)
+        
+    def copy(self):
+        return Set(list(self.elements))
 
 
     @staticmethod
@@ -327,7 +330,7 @@ class Set:
 
         if len(_setb) == 1:
             for x in self:
-                for y in _setb[0]:
+                for y in _setb[0].copy():
                     result.append((x,y))
         else:
             otherComb = _setb[0].cartesianProduct(_setb[1:][0])

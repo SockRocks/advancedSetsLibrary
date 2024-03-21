@@ -27,3 +27,4 @@ Enjoy!
 - Fixed issue when printing Sets containing tuples with Sets where Sets would not display properly
 - Fixed miscalculation bug with the cartesian product
 - Fixed issues with Sets containing strings
+- Fixed issue with infinite iteration when iterating over self
