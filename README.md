@@ -7,7 +7,7 @@ Invoke `import SetCalcPy` in your file or console!
 Enjoy!
 
 *********************Simple Operations*********************
-+ Declare sets like so `A = Set(1,2,3)` and `B = Set(1,2,Set(3,4))
++ Declare sets like so `A = Set(1,2,3)` and `B = Set(1,2,Set(3,4))`
 + Take the union of two sets (find all elements in `A` or `B`): `A + B`
 + Take the intersection of two sets (find all elements in `A` and `B`): `A & B`
 + Take the disjoint of two sets (find all elements in `A` but not `B`): `A - B`
